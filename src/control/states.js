@@ -90,7 +90,7 @@ const states = {
             if (n && xy.get(0) + k1 >= 0) {
               // 竖坐标可以为负
               let line = matrix.get(xy.get(0) + k1)
-              line = line.set(xy.get(1) + k2, 1)
+              line = line.set(xy.get(1) + k2, cur.type)
               matrix = matrix.set(xy.get(0) + k1, line)
             }
           })

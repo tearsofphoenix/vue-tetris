@@ -39,7 +39,7 @@ const down = store => {
             if (n && xy[0] + k1 >= 0) {
               // 竖坐标可以为负
               let line = matrix.get(xy[0] + k1)
-              line = line.set(xy[1] + k2, 1)
+              line = line.set(xy[1] + k2, cur.type)
               matrix = matrix.set(xy[0] + k1, line)
             }
           })

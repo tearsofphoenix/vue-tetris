@@ -4,6 +4,10 @@ import { fillLine, blankLine } from '../../unit/const'
 import states from '../../control/states'
 const t = setTimeout
 
+const store = {
+
+}
+
 export default {
   props: ['cur', 'reset', 'propMatrix'],
   watch: {
@@ -22,7 +26,6 @@ export default {
       matrix = this.getResult()
     }
     matrix = matrix.toJS()
-    console.log(24, matrix)
     return (
       <div class="matrix">
         {matrix.map((p, k1) =>
@@ -30,8 +33,10 @@ export default {
             {p.map((e, k2) => {
               if (typeof e === 'string') {
                 return (<b className={'c'}>{e}</b>)
+              } else if(Array.isArray(e)) {
+                console.log(37, e)
+                return (<b className={'c d'}>{e[0]}</b>)
               } else {
-                console.log(40, e)
                 return (<b className={(e === 1 ? 'c' : '') + (e === 2 ? 'd' : '')} />)
               }
             })}
@@ -101,7 +106,7 @@ export default {
               if (line.get(xy.get(1) + k2) === 1 && !clearLines) {
                 // 矩阵与方块重合
                 console.log(97, xy)
-                color = cur.type
+                color = [cur.type]
               } else {
                 color = cur.type
               }
