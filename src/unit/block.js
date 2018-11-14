@@ -19,7 +19,7 @@ class Block {
 
     if (!option.shape) {
       // init
-      this.shape = blockShape[option.type]
+      this.shape = blockShape.I
     } else {
       this.shape = option.shape
     }

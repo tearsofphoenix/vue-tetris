@@ -21,6 +21,7 @@ export default {
       matrix = this.getResult()
     }
     matrix = matrix.toJS()
+    console.log(24, matrix)
     return (
       <div class="matrix">
         {matrix.map((p, k1) =>

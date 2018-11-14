@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "hanzi": "^2.1.0",
     "immutable": "^3.8.1",
     "vue": "^2.3.3",
     "vuex": "^2.3.1"

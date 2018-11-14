@@ -2,9 +2,12 @@ import { getNextType } from '../unit'
 import Block from '../unit/block'
 const mutations = {
   nextBlock(state, data) {
+    console.log(5, data)
     if (!data) {
+      console.log(7)
       data = getNextType()
     }
+    console.log(data)
     state.next = data
   },
   moveBlock(state, data) {
