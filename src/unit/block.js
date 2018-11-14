@@ -23,35 +23,8 @@ class Block {
     } else {
       this.shape = option.shape
     }
-    if (!option.xy) {
-      switch (option.type) {
-        case 'I': // I
-          this.xy = [0, 3]
-          break
-        case 'L': // L
-          this.xy = [-1, 4]
-          break
-        case 'J': // J
-          this.xy = [-1, 4]
-          break
-        case 'Z': // Z
-          this.xy = [-1, 4]
-          break
-        case 'S': // S
-          this.xy = [-1, 4]
-          break
-        case 'O': // O
-          this.xy = [-1, 4]
-          break
-        case 'T': // T
-          this.xy = [-1, 4]
-          break
-        default:
-          break
-      }
-    } else {
-      this.xy = option.xy
-    }
+
+    this.xy = option.xy || [0, 0]
   }
   rotate() {
     const shape = fromJS(this.shape)

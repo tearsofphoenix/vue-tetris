@@ -3,6 +3,7 @@ import { isClear } from '../../unit/'
 import { fillLine, blankLine } from '../../unit/const'
 import states from '../../control/states'
 const t = setTimeout
+
 export default {
   props: ['cur', 'reset', 'propMatrix'],
   watch: {
@@ -26,9 +27,14 @@ export default {
       <div class="matrix">
         {matrix.map((p, k1) =>
           <p>
-            {p.map((e, k2) =>
-              <b class={(e === 1 ? 'c' : '') + (e === 2 ? 'd' : '')} />
-            )}
+            {p.map((e, k2) => {
+              if (typeof e === 'string') {
+                return (<b className={'c'}>{e}</b>)
+              } else {
+                console.log(40, e)
+                return (<b className={(e === 1 ? 'c' : '') + (e === 2 ? 'd' : '')} />)
+              }
+            })}
           </p>
         )}
       </div>
@@ -63,7 +69,7 @@ export default {
       }
       const cur = props.cur
       const shape = cur && cur.shape
-      const xy = fromJS(cur && cur.xy)
+      const xy = fromJS((cur && cur.xy) || [0, 0])
       let matrix = fromJS(props.propMatrix)
       const clearLines = this.clearLines
       if (clearLines) {
@@ -94,9 +100,10 @@ export default {
               let color
               if (line.get(xy.get(1) + k2) === 1 && !clearLines) {
                 // 矩阵与方块重合
-                color = 2
+                console.log(97, xy)
+                color = cur.type
               } else {
-                color = 1
+                color = cur.type
               }
               line = line.set(xy.get(1) + k2, color)
               matrix = matrix.set(xy.get(0) + k1, line)
