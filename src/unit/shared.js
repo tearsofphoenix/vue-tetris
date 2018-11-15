@@ -9,7 +9,7 @@ export function findMatch(matrix, current, row, column) {
   if (nextLine) {
     down = nextLine.get(column)
   }
-  console.log(13, left, right, down)
+  console.log(13, current, left, right, down)
   let result
   if (typeof left === 'string') {
     result = tryToCompose(left, current)

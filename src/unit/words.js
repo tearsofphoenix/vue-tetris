@@ -15,7 +15,7 @@ words.forEach((looper, idx) => {
 
 export function tryToCompose(w1, w2) {
   const k1 = List([w1, w2])
-  const k2 = List([w2, w2])
+  const k2 = List([w2, w1])
   let v = reverseMap.get(k1)
   if (v) {
     return v
@@ -23,5 +23,6 @@ export function tryToCompose(w1, w2) {
   return reverseMap.get(k2)
 }
 
+console.log(tryToCompose('一', '白'))
 // console.log(tryToCompose('禾', '皿'))
 // console.log(tryToCompose('白', '勺'))
