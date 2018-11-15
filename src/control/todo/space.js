@@ -3,6 +3,8 @@ import event from '../../unit/event'
 import states from '../states'
 import { music } from '../../unit/music'
 import { fromJS, List } from 'immutable'
+import {findMatch} from '../../unit/shared'
+
 const down = store => {
   store.commit('key_drop', true)
   event.down({
@@ -34,16 +36,20 @@ const down = store => {
         store.commit('moveBlock', bottom)
         const shape = bottom.shape
         const xy = bottom.xy
-        shape.forEach((m, k1) =>
+        shape.forEach((m, k1) => {
+          const row = xy[0] + k1
           m.forEach((n, k2) => {
-            if (n && xy[0] + k1 >= 0) {
+            const column = xy[1] + k2
+            if (n && row >= 0) {
               // 竖坐标可以为负
-              let line = matrix.get(xy[0] + k1)
-              line = line.set(xy[1] + k2, cur.type)
-              matrix = matrix.set(xy[0] + k1, line)
+              let line = matrix.get(row)
+              line = line.set(column, cur.type)
+              console.log(42, 'drop')
+              matrix = matrix.set(row, line)
+              matrix = findMatch(matrix, cur.type, row, column)
             }
           })
-        )
+        })
         store.commit('drop', true)
         setTimeout(() => {
           store.commit('drop', false)

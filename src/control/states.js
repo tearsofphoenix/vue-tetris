@@ -85,16 +85,23 @@ const states = {
         let matrix = fromJS(state.matrix)
         const shape = cur && cur.shape
         const xy = fromJS(cur && cur.xy)
-        shape.forEach((m, k1) =>
+        shape.forEach((m, k1) => {
+          const row = xy.get(0) + k1
           m.forEach((n, k2) => {
-            if (n && xy.get(0) + k1 >= 0) {
+            const column = xy.get(1) + k2
+            if (n && row >= 0) {
               // 竖坐标可以为负
-              let line = matrix.get(xy.get(0) + k1)
-              line = line.set(xy.get(1) + k2, cur.type)
-              matrix = matrix.set(xy.get(0) + k1, line)
+              let line = matrix.get(row)
+              line = line.set(column, cur.type)
+              console.log(94, line.get(column - 1), line.get(column + 1))
+              const nextLine  = matrix.get(row + 1)
+              if (nextLine) {
+                console.log(nextLine.get(column))
+              }
+              matrix = matrix.set(row, line)
             }
           })
-        )
+        })
         states.nextAround(matrix)
       }
     }

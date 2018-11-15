@@ -42,6 +42,7 @@ const down = store => {
                 let line = matrix.get(xy.get(0) + k1)
                 line = line.set(xy.get(1) + k2, cur.type)
                 matrix = matrix.set(xy.get(0) + k1, line)
+                console.log(45)
               }
             })
           )
