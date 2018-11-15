@@ -32,7 +32,7 @@ export default {
           <p>
             {p.map((e, k2) => {
               if (typeof e === 'string') {
-                return (<b className={'c'}>{e}</b>)
+                return (<b className={'c n'}>{e}</b>)
               } else if(Array.isArray(e)) {
                 console.log(37, e)
                 return (<b className={'c d'}>{e[0]}</b>)
@@ -97,24 +97,31 @@ export default {
           )
         })
       } else if (shape) {
-        shape.forEach((m, k1) =>
+        shape.forEach((m, k1) => {
+          const row = xy.get(0) + k1
           m.forEach((n, k2) => {
-            if (n && xy.get(0) + k1 >= 0) {
-              // 竖坐标可以为负
-              let line = matrix.get(xy.get(0) + k1)
-              let color
-              if (line.get(xy.get(1) + k2) === 1 && !clearLines) {
-                // 矩阵与方块重合
-                console.log(97, xy)
-                color = [cur.type]
-              } else {
-                color = cur.type
+              const column = xy.get(1) + k2
+              if (n && row >= 0) {
+                // 竖坐标可以为负
+                let line = matrix.get(row)
+                let color
+                if (line.get(column) === 1 && !clearLines) {
+                  // 矩阵与方块重合
+                  console.log(97, xy)
+                  color = [cur.type]
+                  console.log(line.get(column - 1), line.get(column + 1))
+                  const nextLine = matrix.get(row + 1)
+                  if (nextLine) {
+                    console.log(nextLine.get(column))
+                  }
+                } else {
+                  color = cur.type
+                }
+                line = line.set(column, color)
+                matrix = matrix.set(row, line)
               }
-              line = line.set(xy.get(1) + k2, color)
-              matrix = matrix.set(xy.get(0) + k1, line)
-            }
-          })
-        )
+            })
+        })
       }
       return matrix
     },

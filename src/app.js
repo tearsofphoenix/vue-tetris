@@ -13,6 +13,8 @@ import { mapState } from 'vuex'
 import { transform, lastRecord, speeds, i18n, lan } from './unit/const'
 import { visibilityChangeEvent, isFocus } from './unit/'
 import states from './control/states'
+import './unit/words'
+
 export default {
   mounted() {
     this.render()
